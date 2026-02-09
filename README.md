@@ -1,100 +1,86 @@
-# UNIVERSITY CAMPUS NETWORK PROJECT
+# UNIVERSITY-CAMPUS-PROJECT
 
-## 📌 Overview
-This project is a network design and implementation for **Albion University**, which has two campuses located 20 miles apart.  
-The network is designed using **VLANs, Routing (RIPv2), DHCP, and Inter-VLAN Routing** to provide full end-to-end connectivity between departments, faculties, internal servers, and an external cloud email server.
-
----
-
-## 🗺️ Network Topology
+## TOPOLOGY
 <p align="center">
   <img src="https://github.com/user-attachments/assets/3e8b7fe5-67cf-435e-b892-e11ff47f1bca" width="900">
 </p>
 
 ---
 
-## 📚 Coursework Brief
+## QUESTION
 
-Albion University consists of two campuses:
-- **Main Campus**
-- **Smaller Campus**
+### ENGLISH VERSION
 
-The university has four faculties:
-- Health and Sciences
-- Business
-- Engineering and Computing
-- Art and Design
+**Coursework Brief**
 
-Each staff member has a PC, and students access PCs via laboratories.
+Albion University is a large university which has two campuses situated 20 miles apart.  
+The university's students and staff are distributed in 4 faculties:
+- Health and Sciences  
+- Business  
+- Engineering and Computing  
+- Art and Design  
 
----
+Each member of staff has a PC and students have access to PCs in the labs.
 
-## 🏢 Campus Structure
+#### Requirements
+**a. Network Design**
+- Main Campus:
+  - **Building A**  
+    Administrative staff (Management, HR, Finance)  
+    Faculty of Business  
+    VLANs are required
+  - **Building B**  
+    Engineering & Computing  
+    Art & Design
+  - **Building C**  
+    Student Labs  
+    IT Department  
+    Internal Web Server and other servers
+  - External Email Server hosted on the Cloud
 
-### Main Campus
-- **Building A**
-  - Administrative departments: Management, HR, Finance
-  - Faculty of Business
-  - VLAN-based segmentation is required
-- **Building B**
-  - Faculty of Engineering & Computing
-  - Faculty of Art & Design
-- **Building C**
-  - Student Labs
-  - IT Department
-  - Hosts internal Web Server and other servers
+- Smaller Campus:
+  - Faculty of Health & Sciences  
+  - Staff and Student Labs on separate floors
 
-An **external Email Server** is hosted in the cloud.
-
-### Smaller Campus
-- Faculty of Health & Sciences
-- Staff and student labs are located on different floors
-
----
-
-## 🧾 Requirements
-- Each department/faculty must be on a **separate IP network**
-- Switches must be configured with **VLANs and security**
-- **RIPv2** is used for internal routing
-- **Static routing** is used for external server access
-- Devices in Building A must obtain IP addresses via **Router-based DHCP**
+**b. Configuration**
+- Separate IP network for each department/faculty
+- VLAN and security configuration on switches
+- RIPv2 for internal routing
+- Static routing for external server
+- DHCP provided by router for Building A
 
 ---
 
-## 🧰 Devices Used
+### VERSI BAHASA INDONESIA
+
+Universitas Albion memiliki dua kampus dengan jarak 20 mil.  
+Mahasiswa dan staf tersebar di empat fakultas:
+- Kesehatan dan Sains  
+- Bisnis  
+- Teknik dan Komputasi  
+- Seni dan Desain  
+
+Setiap staf memiliki PC dan mahasiswa menggunakan PC di laboratorium.
+
+---
+
+## DEVICE
 - Router 2911 (3 Units)
 - Multilayer Switch L3 (1 Unit)
 - Switch L2 (10 Units)
-- End Devices (PCs)
+- End Devices (PC)
 - Server (3 Units)
 
 ---
 
-## 🔌 Cable Types
+## CABLE
 - Serial DCE
 - Copper Straight-Through
 - Copper Cross-Over
 
 ---
 
-## 🔧 VLAN Allocation
-
-| VLAN ID | Name       | Department / Area |
-|-------:|------------|-------------------|
-| 10 | ADMIN     | Administration |
-| 20 | HR        | Human Resources |
-| 30 | FINANCE   | Finance |
-| 40 | BUSINESS  | Business Faculty |
-| 50 | E&C       | Engineering & Computing |
-| 60 | A&D       | Art & Design |
-| 70 | STUDLAB   | Student Labs |
-| 80 | ITLAB     | IT Department |
-| 90 | STAFF     | Health & Science Staff |
-| 100 | STUDENT  | Health & Science Students |
-
----
-
-## 🔧 Switch L2 Configuration
+## CONFIGURE DEVICE
 
 ### SWITCH ADMIN
 ```bash
@@ -163,7 +149,7 @@ interface range fa0/1-24
 exit
 
 
-SWITCH STUDENT LAB
+SWITCH STUD_LAB
 enable
 configure terminal
 vlan 70
@@ -174,7 +160,7 @@ interface range fa0/1-24
 exit
 
 
-SWITCH IT LAB
+SWITCH IT_LAB
 enable
 configure terminal
 vlan 80
@@ -185,9 +171,10 @@ interface range fa0/1-24
 exit
 
 
-🔀 Multilayer Switch (L3) Configuration
+CONFIGURE MULTILAYER SWITCH L3
 enable
 configure terminal
+
 interface gigabitEthernet1/0/1
  switch mode trunk
 exit
@@ -232,12 +219,30 @@ interface gigabitEthernet1/0/9
  switch access vlan 80
 exit
 
+do write
 
-Router Main Configuration (Router-on-a-Stick)
+
+CONFIGURE ROUTER 2911 (MAIN)
+enable
+configure terminal
+
 interface gig0/0
  no shutdown
 exit
 
+interface serial0/1/0
+ no shutdown
+ clock rate 64000
+exit
+
+interface serial0/1/1
+ no shutdown
+ clock rate 64000
+exit
+
+
+ROUTER-ON-A-STICK
+ROUTER MAIN
 interface gig0/0.10
  encapsulation dot1Q 10
  ip address 192.168.1.1 255.255.255.0
@@ -279,7 +284,7 @@ interface gig0/0.80
 exit
 
 
-📡 DHCP Configuration (Router-Based)
+DHCP POOL (ROUTER MAIN)
 service dhcp
 
 ip dhcp pool ADMIN
@@ -300,11 +305,43 @@ ip dhcp pool FINANCE
  dns-server 192.168.3.1
 exit
 
+ip dhcp pool BUSINESS
+ network 192.168.4.0 255.255.255.0
+ default-router 192.168.4.1
+ dns-server 192.168.4.1
+exit
 
-🔁 Routing Configuration (RIPv2)
-MAIN ROUTER
+ip dhcp pool E&C
+ network 192.168.5.0 255.255.255.0
+ default-router 192.168.5.1
+ dns-server 192.168.5.1
+exit
+
+ip dhcp pool A&D
+ network 192.168.6.0 255.255.255.0
+ default-router 192.168.6.1
+ dns-server 192.168.6.1
+exit
+
+ip dhcp pool STUDLAB
+ network 192.168.7.0 255.255.255.0
+ default-router 192.168.7.1
+ dns-server 192.168.7.1
+exit
+
+ip dhcp pool ITLAB
+ network 192.168.8.0 255.255.255.0
+ default-router 192.168.8.1
+ dns-server 192.168.8.1
+exit
+
+
+ROUTING (RIPv2)
+ROUTER MAIN
 router rip
  version 2
+ network 10.10.10.0
+ network 10.10.10.4
  network 192.168.1.0
  network 192.168.2.0
  network 192.168.3.0
@@ -315,4 +352,14 @@ router rip
  network 192.168.8.0
 exit
 
+do write
 
+
+
+
+<img width="930" height="362" alt="Image" src="https://github.com/user-attachments/assets/c3cd87a4-9574-42b6-b374-90b5eaeeaf1b" />
+
+
+
+
+<img width="739" height="625" alt="Image" src="https://github.com/user-attachments/assets/c4ac070c-48a0-4aa0-b620-f6b9d1098468" />
