@@ -1,430 +1,318 @@
-# UNIVERSITY-CAMPUS-PROJECT-
+# UNIVERSITY CAMPUS NETWORK PROJECT
 
-TOPOLOGI
-<img width="3198" height="982" alt="Image" src="https://github.com/user-attachments/assets/3e8b7fe5-67cf-435e-b892-e11ff47f1bca" />
+## 📌 Overview
+This project is a network design and implementation for **Albion University**, which has two campuses located 20 miles apart.  
+The network is designed using **VLANs, Routing (RIPv2), DHCP, and Inter-VLAN Routing** to provide full end-to-end connectivity between departments, faculties, internal servers, and an external cloud email server.
 
+---
 
-QUESTION
-# ENGLISH VERSION
+## 🗺️ Network Topology
+<p align="center">
+  <img src="https://github.com/user-attachments/assets/3e8b7fe5-67cf-435e-b892-e11ff47f1bca" width="900">
+</p>
 
-Coursework Brief
-Albion University is a large university which has two campuses situated 20 miles apart. The university's students and staff are distributed in 4 faculties; these include the faculties of Health and Sciences; Business; Engineering/Computing and Art/Design. Each member of staff has a PC and students have access to PCs in the labs.
+---
 
-Requirements:
-a. Create a network topology with the main components to support the following:
-Main campus:
-- Building A: Administrative staff in the departments of management, HR and finance. The admin staff PCs are distributed in the building offices and it is expected that they will share some networking equipment (Hint: use of VLANs is expected here). The Faculty of Business is also situated in this building.
-- Building B: Faculty of Engineering and Computing and Faculty of Art and Design.
-- Building C: Students' labs and IT department. The IT department hosts the University Web server and other servers.
-There is also an email server hosted externally on the cloud.
-- Smaller campus:
-Faculty of Health and Sciences (staff and students' labs are situated on separate floors).
+## 📚 Coursework Brief
 
-b. You will be expected to configure the core devices and few end devices to provide end-to-end connectivity and access to the internal servers and the external server.
-- Each department/faculty is expected to be on its own separate IP network.
-- The switches should be configured with appropriate VLANs and security settings.
-- RIPv2 will be used to provide routing for the routers in the internal network and static routing for the external server.
-- The devices in building A will be expected to acquire dynamic IP addresses from a router-based DHCP server.
+Albion University consists of two campuses:
+- **Main Campus**
+- **Smaller Campus**
 
+The university has four faculties:
+- Health and Sciences
+- Business
+- Engineering and Computing
+- Art and Design
 
+Each staff member has a PC, and students access PCs via laboratories.
 
-# Versi Bahasa Indonesia
-Ringkasan Tugas Kuliah
-Universitas Albion adalah universitas besar yang memiliki dua kampus dengan jarak 20 mil. Mahasiswa dan staf universitas tersebar di 4 fakultas; mencakup fakultas Kesehatan dan Sains; Bisnis; Teknik/Komputasi dan Seni/Desain. Setiap anggota staf memiliki PC dan mahasiswa memiliki akses ke PC di laboratorium.
+---
 
-Persyaratan:
-a. Buatlah topologi jaringan dengan komponen utama untuk mendukung hal-hal berikut:
-Kampus Utama:
-- Gedung A: Staf administrasi di departemen manajemen, HRD, dan keuangan. PC staf admin tersebar di kantor-kantor gedung dan diharapkan mereka akan berbagi beberapa perangkat jaringan (Petunjuk: penggunaan VLAN diharapkan di sini). Fakultas Bisnis juga terletak di gedung ini.
-- Gedung B: Fakultas Teknik dan Komputasi serta Fakultas Seni dan Desain.
-- Gedung C: Laboratorium mahasiswa dan departemen IT. Departemen IT meng-host server Web Universitas dan server lainnya.
-Terdapat juga server email yang di-host secara eksternal di cloud.
-- Kampus Kecil:
-Fakultas Kesehatan dan Sains (staf dan lab mahasiswa terletak di lantai yang berbeda).
+## 🏢 Campus Structure
 
-b. Anda diharapkan untuk mengonfigurasi perangkat inti dan beberapa perangkat akhir untuk menyediakan konektivitas ujung-ke-ujung (end-to-end) serta akses ke server internal dan server eksternal.
-- Setiap departemen/fakultas diharapkan berada pada jaringan IP terpisah masing-masing.
-- Switch harus dikonfigurasi dengan VLAN dan pengaturan keamanan yang sesuai.
-- RIPv2 akan digunakan untuk menyediakan perutean (routing) bagi router di jaringan internal dan routing statis untuk server eksternal.
-- Perangkat di gedung A diharapkan mendapatkan alamat IP dinamis dari server DHCP berbasis router.
+### Main Campus
+- **Building A**
+  - Administrative departments: Management, HR, Finance
+  - Faculty of Business
+  - VLAN-based segmentation is required
+- **Building B**
+  - Faculty of Engineering & Computing
+  - Faculty of Art & Design
+- **Building C**
+  - Student Labs
+  - IT Department
+  - Hosts internal Web Server and other servers
 
-DEVICE 
-1. ROUTER 2911 3 units
-2. SWITCH L3 (Multilayer Switch) 1 unit
-3. Switch L2 10 units
-4. END DEVICE
-5. SERVER 3 units
+An **external Email Server** is hosted in the cloud.
 
-CABLE
-SERIAL DCE
-CROSS OVER
-COPPER STRAIGHT
+### Smaller Campus
+- Faculty of Health & Sciences
+- Staff and student labs are located on different floors
 
+---
 
-# CONFIGURE DEVICE 
+## 🧾 Requirements
+- Each department/faculty must be on a **separate IP network**
+- Switches must be configured with **VLANs and security**
+- **RIPv2** is used for internal routing
+- **Static routing** is used for external server access
+- Devices in Building A must obtain IP addresses via **Router-based DHCP**
 
-SWITCH ADMIN
+---
+
+## 🧰 Devices Used
+- Router 2911 (3 Units)
+- Multilayer Switch L3 (1 Unit)
+- Switch L2 (10 Units)
+- End Devices (PCs)
+- Server (3 Units)
+
+---
+
+## 🔌 Cable Types
+- Serial DCE
+- Copper Straight-Through
+- Copper Cross-Over
+
+---
+
+## 🔧 VLAN Allocation
+
+| VLAN ID | Name       | Department / Area |
+|-------:|------------|-------------------|
+| 10 | ADMIN     | Administration |
+| 20 | HR        | Human Resources |
+| 30 | FINANCE   | Finance |
+| 40 | BUSINESS  | Business Faculty |
+| 50 | E&C       | Engineering & Computing |
+| 60 | A&D       | Art & Design |
+| 70 | STUDLAB   | Student Labs |
+| 80 | ITLAB     | IT Department |
+| 90 | STAFF     | Health & Science Staff |
+| 100 | STUDENT  | Health & Science Students |
+
+---
+
+## 🔧 Switch L2 Configuration
+
+### SWITCH ADMIN
+```bash
 enable
 configure terminal
 vlan 10
-name ADMIN
+ name ADMIN
 interface range fa0/1-24
-switch mode access
-switch access vlan 10
+ switch mode access
+ switch access vlan 10
+exit
+
 
 SWITCH HR
 enable
 configure terminal
 vlan 20
-name HR
+ name HR
 interface range fa0/1-24
-switch mode access
-switch access vlan 20
+ switch mode access
+ switch access vlan 20
+exit
+
 
 SWITCH FINANCE
 enable
 configure terminal
 vlan 30
-name FINANCE
+ name FINANCE
 interface range fa0/1-24
-switch mode access
-switch access vlan 30
+ switch mode access
+ switch access vlan 30
+exit
+
 
 SWITCH BUSINESS
 enable
 configure terminal
 vlan 40
-name BUSINNES
+ name BUSINESS
 interface range fa0/1-24
-switch mode access
-switch access vlan 40
+ switch mode access
+ switch access vlan 40
+exit
+
 
 SWITCH E&C
 enable
 configure terminal
 vlan 50
-name E&C
+ name E&C
 interface range fa0/1-24
-switch mode access
-switch access vlan 50
+ switch mode access
+ switch access vlan 50
+exit
+
 
 SWITCH A&D
 enable
 configure terminal
 vlan 60
-name A&D
+ name A&D
 interface range fa0/1-24
-switch mode access
-switch access vlan 60
+ switch mode access
+ switch access vlan 60
+exit
 
-SWITCH STUD_LAB
+
+SWITCH STUDENT LAB
 enable
 configure terminal
 vlan 70
-name STUDLAB
+ name STUDLAB
 interface range fa0/1-24
-switch mode access
-switch access vlan 70
+ switch mode access
+ switch access vlan 70
+exit
 
-SWITCH IT_LAB
+
+SWITCH IT LAB
 enable
 configure terminal
 vlan 80
-name ITLAB
+ name ITLAB
 interface range fa0/1-24
-switch mode access
-switch access vlan 80
+ switch mode access
+ switch access vlan 80
+exit
 
-# CONFIGURE 
-MULTILAYER SWITCH L3
+
+🔀 Multilayer Switch (L3) Configuration
 enable
 configure terminal
+interface gigabitEthernet1/0/1
+ switch mode trunk
+exit
+
 interface gigabitEthernet1/0/2
-switch mode access 
-sw access vlan 10
+ switch mode access
+ switch access vlan 10
 exit
 
-MULTILAYER SWITCH L3
-enable
-configure terminal
 interface gigabitEthernet1/0/3
-switch mode access 
-sw access vlan 20
+ switch mode access
+ switch access vlan 20
 exit
 
-MULTILAYER SWITCH L3
-enable
-configure terminal
 interface gigabitEthernet1/0/4
-switch mode access 
-sw access vlan 30
+ switch mode access
+ switch access vlan 30
 exit
 
-MULTILAYER SWITCH L3
-enable
-configure terminal
 interface gigabitEthernet1/0/5
-switch mode access 
-sw access vlan 40
+ switch mode access
+ switch access vlan 40
 exit
 
-MULTILAYER SWITCH L3
-enable
-configure terminal
 interface gigabitEthernet1/0/6
-switch mode access 
-sw access vlan 50
+ switch mode access
+ switch access vlan 50
 exit
 
-MULTILAYER SWITCH L3
-enable
-configure terminal
 interface gigabitEthernet1/0/7
-switch mode access 
-sw access vlan 60
+ switch mode access
+ switch access vlan 60
 exit
 
-MULTILAYER SWITCH L3
-enable
-configure terminal
 interface gigabitEthernet1/0/8
-switch mode access 
-sw access vlan 70
+ switch mode access
+ switch access vlan 70
 exit
 
-MULTILAYER SWITCH L3
-enable
-configure terminal
 interface gigabitEthernet1/0/9
-switch mode access 
-sw access vlan 80
+ switch mode access
+ switch access vlan 80
 exit
 
-interface gigabitEthernet10/1
-swithc mode trunk
-exit
-do write
 
-
-# CONFIGURE ROUTER 2911
-
-ROUTER MAIN
-enable
-configure terminal
+Router Main Configuration (Router-on-a-Stick)
 interface gig0/0
-no sh
+ no shutdown
 exit
 
-interface serial0/1/0
-no sh
-clock rate 64000
-ex
+interface gig0/0.10
+ encapsulation dot1Q 10
+ ip address 192.168.1.1 255.255.255.0
+exit
 
-interface serial0/1/1
-no sh
-clock rate 64000
-ex
+interface gig0/0.20
+ encapsulation dot1Q 20
+ ip address 192.168.2.1 255.255.255.0
+exit
 
-Router(config)#int gig0/0.10
-Router(config-subif)#encapsulation dot1Q 10
-Router(config-subif)#ip address 192.168.1.1 255.255.255.0
-Router(config-subif)#ex
+interface gig0/0.30
+ encapsulation dot1Q 30
+ ip address 192.168.3.1 255.255.255.0
+exit
 
-Router(config)#int gig0/0.20
-Router(config-subif)#encapsulation dot1Q 20
-Router(config-subif)#ip address 192.168.2.1 255.255.255.0
-Router(config-subif)#ex
+interface gig0/0.40
+ encapsulation dot1Q 40
+ ip address 192.168.4.1 255.255.255.0
+exit
 
-Router(config)#int gig0/0.30
-Router(config-subif)#encapsulation dot1Q 30
-Router(config-subif)#ip address 192.168.3.1 255.255.255.0
-Router(config-subif)#ex
+interface gig0/0.50
+ encapsulation dot1Q 50
+ ip address 192.168.5.1 255.255.255.0
+exit
 
-Router(config)#int gig0/0.40
-Router(config-subif)#encapsulation dot1Q 40
-Router(config-subif)#ip address 192.168.4.1 255.255.255.0
-Router(config-subif)#ex
+interface gig0/0.60
+ encapsulation dot1Q 60
+ ip address 192.168.6.1 255.255.255.0
+exit
 
-Router(config)#int gig0/0.50
-Router(config-subif)#encapsulation dot1Q 50
-Router(config-subif)#ip address 192.168.5.1 255.255.255.0
-Router(config-subif)#ex
+interface gig0/0.70
+ encapsulation dot1Q 70
+ ip address 192.168.7.1 255.255.255.0
+exit
 
-Router(config)#int gig0/0.60
-Router(config-subif)#encapsulation dot1Q 60
-Router(config-subif)#ip address 192.168.6.1 255.255.255.0
-Router(config-subif)#ex
-
-Router(config)#int gig0/0.70
-Router(config-subif)#encapsulation dot1Q 70
-Router(config-subif)#ip address 192.168.7.1 255.255.255.0
-Router(config-subif)#ex
-
-Router(config)#int gig0/0.80
-Router(config-subif)#encapsulation dot1Q 80
-Router(config-subif)#ip address 192.168.8.1 255.255.255.0
-Router(config-subif)#ex
+interface gig0/0.80
+ encapsulation dot1Q 80
+ ip address 192.168.8.1 255.255.255.0
+exit
 
 
-# DHCP POOL ROUTER MAIN
-Router(config)#service dhcp
-
-Router(config)#ip dhcp pool ADMIN
-Router(dhcp-config)#network 192.168.1.0 255.255.255.0
-Router(dhcp-config)#default-router 192.168.1.1 
-Router(dhcp-config)#dns-server 192.168.1.1
-Router(dhcp-config)#ex
-
-Router(config)#ip dhcp pool HR
-Router(dhcp-config)#network 192.168.2.0 255.255.255.0
-Router(dhcp-config)#default-router 192.168.2.1 
-Router(dhcp-config)#dns-server 192.168.2.1
-Router(dhcp-config)#ex
-
-Router(config)#ip dhcp pool FINANCE
-Router(dhcp-config)#network 192.168.3.0 255.255.255.0
-Router(dhcp-config)#default-router 192.168.3.1
-Router(dhcp-config)#dns-server 192.168.3.1
-Router(dhcp-config)#ex
-
-Router(config)#ip dhcp pool BUSINESS
-Router(dhcp-config)#network 192.168.4.0 255.255.255.0
-Router(dhcp-config)#default-router 192.168.4.1
-Router(dhcp-config)#dns-server 192.168.4.1
-Router(dhcp-config)#ex
-
-Router(config)#ip dhcp pool E&C
-Router(dhcp-config)#network 192.168.5.0 255.255.255.0
-Router(dhcp-config)#default-router 192.168.5.1
-Router(dhcp-config)#dns-server 192.168.5.1
-Router(dhcp-config)#ex
-
-Router(config)#ip dhcp pool A&D
-Router(dhcp-config)#network 192.168.6.0 255.255.255.0
-Router(dhcp-config)#dns-server 192.168.6.1
-Router(dhcp-config)#default-router 192.168.6.1
-Router(dhcp-config)#ex
-
-Router(config)#ip dhcp pool STUDLAB
-Router(dhcp-config)#network 192.168.7.0 255.255.255.0
-Router(dhcp-config)#default-router 192.168.7.1 
-Router(dhcp-config)#dns-server 192.168.7.1
-Router(dhcp-config)#ex
-
-Router(config)#ip dhcp pool ITLAB
-Router(dhcp-config)#network 192.168.8.0 255.255.255.0
-Router(dhcp-config)#default-router 192.168.8.1
-Router(dhcp-config)#dns-server 192.168.8.1
-
-Router(config)#router rip
-Router(config-router)#version 2
-Router(config-router)#network 10.10.10.0
-Router(config-router)#network 10.10.10.4
-Router(config-router)#network 192.168.1.0
-Router(config-router)#network 192.168.2.0
-Router(config-router)#network 192.168.3.0
-Router(config-router)#network 192.168.4.0
-Router(config-router)#network 192.168.5.0
-Router(config-router)#network 192.168.6.0
-Router(config-router)#network 192.168.7.0
-Router(config-router)#network 192.168.8.0
-Router(config-router)#ex
-Router(config)#do wr
-
-
-# ROUTER CLOUD
-enable
-configure terminal 
-interface serial0/1/0
-no sh
-
-Router(config)#router rip
-Router(config-router)#version 2
-Router(config-router)#network 20.0.0.0
-Router(config-router)#network 10.10.10.4
-Router(config-router)#ex
-Router(config)#do wr
-
-# ROUTER BRANCH CAMPUS 
-enable
-configure terminal
-int serial0/1/0
-no sh
-ex
-
-int gig0/0.90
-encapsulation dot1q 90
-ip address 192.168.9.1 255.255.255.0
-ex
-
-int gig0/0.100
-encapsulation dot1q 100
-ip address 192.168.10.1 255.255.255.0
-ex
-
+📡 DHCP Configuration (Router-Based)
 service dhcp
-ip dhcp pool Staff
-netowrk 192.168.9.0 255.255.255.0
-default-router 192.168.9.1
-dns-server 192.168.9.1
 
-ip dhcp pool STUDLB
-netowrk 192.168.10.0 255.255.255.0
-default-router 192.168.10.1
-dns-server 192.168.10.1
-ex
-do write
+ip dhcp pool ADMIN
+ network 192.168.1.0 255.255.255.0
+ default-router 192.168.1.1
+ dns-server 192.168.1.1
+exit
 
-Router(config)#router rip 
-Router(config-router)#version 2
-Router(config-router)#network 192.168.9.0
-Router(config-router)#network 192.168.10.0
-Router(config-router)#network 10.10.10.0
-Router(config-router)#ex
-Router(config)#
-Router(config)#do wr
+ip dhcp pool HR
+ network 192.168.2.0 255.255.255.0
+ default-router 192.168.2.1
+ dns-server 192.168.2.1
+exit
+
+ip dhcp pool FINANCE
+ network 192.168.3.0 255.255.255.0
+ default-router 192.168.3.1
+ dns-server 192.168.3.1
+exit
 
 
-# CONFIGURE MULTILAYER SWITCH L3
-int gigabitEthernet1/0/1
-switch mode trunk
-ex
+🔁 Routing Configuration (RIPv2)
+MAIN ROUTER
+router rip
+ version 2
+ network 192.168.1.0
+ network 192.168.2.0
+ network 192.168.3.0
+ network 192.168.4.0
+ network 192.168.5.0
+ network 192.168.6.0
+ network 192.168.7.0
+ network 192.168.8.0
+exit
 
-int gigabitEthernet1/0/2
-switch mode access
-sw access vlan 90
-ex
-
-int gigabitEthernet1/0/3
-switch mode access
-sw access vlan 100
-ex
-do wr
-
-# CONFIGURE SWITCH L2
-enable 
-configure terminal
-int range fa0/1-24
-sw mode access 
-sw access vlan 90
-ex
-
-
-int range fa0/1-24
-sw mode access
-sw access vlan 100
-ex
-
-do wr
-
-
-
-
-
-
-then you do it on all PCs to the desktop, select IP configuration then switch to DHCP
-
-<img width="930" height="362" alt="Image" src="https://github.com/user-attachments/assets/c3cd87a4-9574-42b6-b374-90b5eaeeaf1b" />
-
-<img width="739" height="625" alt="Image" src="https://github.com/user-attachments/assets/c4ac070c-48a0-4aa0-b620-f6b9d1098468" />
 
