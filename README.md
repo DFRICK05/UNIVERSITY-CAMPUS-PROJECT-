@@ -62,6 +62,7 @@ COPPER STRAIGHT
 
 
 # CONFIGURE DEVICE 
+
 SWITCH ADMIN
 enable
 configure terminal
